@@ -1,0 +1,162 @@
+@import './variable.less';
+body{color: @color;}
+/*6点-12点 6 <= x < 12*/
+.morning{
+	background-image: linear-gradient(to bottom, #5476FE, #6FB1FF);
+  }
+  /* 12点-19点 12 <= x < 19 */
+  .day{
+	background-image: linear-gradient(to bottom, #FD7537, #FFAB53);
+  }
+  /*19点- 6点 12 <= x < 第二天6点  */
+  .night{
+	background-image: linear-gradient(to bottom, #4B36FF, #B560FB);
+  }
+  
+.icon-box(@imgName){
+	// width: .24rem;
+	// height: .24rem;
+	background: url(@imgName) no-repeat center center;
+	background-size: cover;
+	// margin-top: .03rem;
+  }
+.main{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	//预留导航
+	.system_nav{
+		height: .2rem;
+		position: sticky;
+		
+	}
+	//搜索导航
+	.search_nav{
+		padding: .05rem .05rem;
+		
+		line-height: .3rem;
+		.area_position{
+			width: 1rem;
+			height: .3rem;
+			// padding: .05rem 0;
+			margin-top: .1rem;
+			.area_position_text{
+				width: .5rem;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			.area_position_icon{
+				width: calc(~"100% - .7rem");
+				height: .3rem;
+				margin-left: .1rem;
+				.icon-box("@{url}/location.png")
+
+			}
+		}
+		.search_box{
+			width: calc(~"100% - 1.3rem");
+			height: .2rem;
+			border-radius: .2rem;
+			padding: .05rem .15rem;
+			background-image: linear-gradient(to right, rgba(255, 255, 255, .2), rgba(255, 255, 255, .65));
+			margin-top: .1rem;
+
+			.search_box_ipt{
+				width: 2rem;
+				height: .2rem;
+			}
+			.search_box_icon{
+				display: block;
+				width: calc(~"100% - 2.15rem");
+				height: .2rem;
+				.icon-box("@{url}/search.png")
+			}
+		}
+	}
+	//温度
+	.temp{
+		text-align: center;
+		h1{font-size: 50px;padding: 0;margin: 0;}
+	}
+	//温度详情
+	.t_particulars{
+		width: 70%;
+		text-align: center;
+		margin: .5rem auto .2rem auto;
+		ul{
+			li{
+				width: calc(~"100% / 3 - 3px");
+				float: left;
+				border-right: 1px solid @color;
+				
+				&:nth-child(3){border-right: none;}
+			}
+		}
+	}
+	.p_nav{text-align: center;font-size: .14rem;}
+	// 选项卡
+	.tab_nav{
+		width: 40%;
+		margin: .5rem auto .2rem auto;
+		.tab{
+			width: .55rem;
+			height: .21rem;
+			position: relative;
+			white-space: nowrap;
+			padding: .02rem 0;
+			
+			
+			p{position: absolute;top: 0;left: -5px;}
+		}
+		.tab_demo{
+			border-bottom: 1px solid @color;
+		}
+	}
+	//选项卡详情
+	.tabContent{
+		height: 1.5rem;
+		margin-top: .3rem;
+		padding: 0 .2rem;
+		
+		.aaa{
+			overflow-x: auto;
+			#day{
+				
+				width: 7rem;
+			}
+			#time{
+				width: 16.8rem;
+			}
+			.tabContent_fist_layer{
+			
+			height: 100%;
+			// position: absolute;
+			// top: 0;
+			// left: 0;
+			>li{
+				width: .5rem;
+				float: left;
+				text-align: center;
+				padding-right: .2rem;
+				.tabContent_second_layer{
+					>:nth-child(2){
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+
+					}
+					.tabContext_icon{
+						margin: .15rem 0;
+						
+					}
+				}
+			}
+		}
+		}
+		
+	}
+}
