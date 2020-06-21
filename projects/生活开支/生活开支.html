@@ -4,14 +4,14 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	
 	<link rel="stylesheet" href="./font/iconfont.css">
-	<link rel="stylesheet" href="./living-costs.css">
+	<link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<div id='app'>
 		<div id="living_costs">
+			<div class="reserve_nav"></div>
 			<div class="u-tabBox">
 				<div class="in_out">
 					<span v-for='(item,index) in in_out' @click='flag=index' :class='{in_out_demo:flag==index}'>{{item.title}}</span>
@@ -56,29 +56,33 @@
 			<div class="saveBox">
 				<button class="savebtn" @click='saveMessage'>保存</button>
 			</div>
-		</div>
-		<!-- 打印出账单 -->
-		<div id="billBox">
-			<div class="bill_message" v-for='(item,index) in messageData'>
-				<div class="iconBox fl" :style='{backgroundColor:item.bgc}'>
-					<span class="iconfont" :class='item.iconFontClass'></span>
-				</div>
-				<div class="fl m_messageBox" :style='{lineHeight:(item.remark?"":item.lineHeight)}'>
-					<div class="messageBox fl">
-						<span class="time">{{item.date}}</span>
-						<span class="payway">{{item.payway}}</span>
+
+			<!-- 打印出账单 -->
+			<div id="billBox">
+				<div class="bill_message" v-for='(item,index) in messageData'>
+					<div class="iconBox fl" :style='{backgroundColor:item.bgc}'>
+						<span class="iconfont" :class='item.iconFontClass'></span>
 					</div>
-					<p class="remark fl" v-if='item.remark'>备注：{{item.remark}}</p>
+					<div class="fl m_messageBox" :style='{lineHeight:(item.remark?"":item.lineHeight)}'>
+						<div class="messageBox fl">
+							<span class="time">{{item.date}}</span>
+							<span class="payway">{{item.payway}}</span>
+						</div>
+						<p class="remark fl" v-if='item.remark'>备注：{{item.remark}}</p>
+					</div>
+					<div class="moneyBox fr" :style='{color:item.color}'>￥<span>{{item.money}}</span></div>
 				</div>
-				<div class="moneyBox fr" :style='{color:item.color}'>￥<span>{{item.money}}</span></div>
 			</div>
 		</div>
+
+
+
 	</div>
 	<script>
 		var vm = new Vue({
 			el:'#app',
 			data:{ 
-				lineHeight:'50px',
+				lineHeight:'.5rem',
 				current:0,//账户选择默认选中 
 				num:null,//u_tabSelect默认选中
 				flag:0,//收入支出默认选中
@@ -165,5 +169,7 @@
 		})
 		//思路：当前的默认 data中的变量current
 	</script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="./js/rem.js"></script>
 </body>
 </html>
