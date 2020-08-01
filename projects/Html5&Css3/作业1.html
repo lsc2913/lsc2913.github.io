@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		.out {
+			width: 150px;
+			height: 150px;
+			background-color: gainsboro;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 2px;
+			float: left;
+			/* perspective: 150px; */
+		}
+
+		.in {
+			width: 100px;
+			height: 100px;
+			background-color: skyblue;
+			position: relative;
+			transition: all 0.5s cubic-bezier(1, 1, 1, 1);
+		}
+
+		.r .in:hover {
+			transform: rotate(45deg);
+		}
+
+		.rX .in:hover {
+			transform: rotateX(45deg);
+		}
+
+		.rY .in:hover {
+			transform: rotateY(45deg);
+		}
+
+		.rZ .in:hover {
+			transform: rotateZ(45deg);
+		}
+
+		.s .in:hover {
+			transform: scale(2);
+		}
+
+		.sX .in:hover {
+			transform: scaleX(2);
+		}
+
+		.sY .in:hover {
+			transform: scaleY(2);
+		}
+
+		.skew .in:hover {
+			transform: skew(45deg, 45deg);
+		}
+
+		.skewX .in:hover {
+			transform: skewX(45deg);
+		}
+
+		.skewY .in:hover {
+			transform: skewY(45deg);
+		}
+
+		.tl .in:hover {
+			transform: translate(-50px, 50px);
+		}
+
+		.per {
+			perspective: 150px;
+			/* 值越大显得 */
+		}
+
+		.per .r:hover {
+			transform: rotate(45deg);
+		}
+
+		.per .rX:hover {
+			transform: rotateX(45deg);
+		}
+
+		.per .rY:hover {
+			transform: rotateY(45deg);
+		}
+
+		/* transform-origin */
+		.to{
+			transform-origin: 0 100% 0 ;
+		}
+		.out .to:hover {
+			transform: rotateY(45deg);
+		}
+		.out .rox:hover {
+			transform: rotateX(45deg);
+		}
+		.out .sa:hover {
+			transform: scale(1.5,1.5);
+		}
+	</style>
+</head>
+
+<body>
+	<div class="out r">
+		<div class="in"></div>
+	</div>
+	<div class="out rX">
+		<div class="in"></div>
+	</div>
+	<div class="out rY">
+		<div class="in"></div>
+	</div>
+	<div class="out rZ">
+		<div class="in"></div>
+	</div>
+	<div class="out s">
+		<div class="in"></div>
+	</div>
+	<div class="out sX">
+		<div class="in"></div>
+	</div>
+	<div class="out sY">
+		<div class="in"></div>
+	</div>
+	<div class="out skew">
+		<div class="in"></div>
+	</div>
+	<div class="out skewX">
+		<div class="in"></div>
+	</div>
+	<div class="out skewY">
+		<div class="in"></div>
+	</div>
+	<div class="out tl">
+		<div class="in"></div>
+	</div>
+	<!-- perspective -->
+	<div class="out per">
+		<div class="in r"></div>
+	</div>
+	<div class="out per">
+		<div class="in rX"></div>
+	</div>
+	<div class="out per">
+		<div class="in rY"></div>
+	</div>
+	<!-- transform-origin -->
+	<div class="out per">
+		<div class="in to"></div>
+	</div>
+	<div class="out per">
+		<div class="in to rox"></div>
+	</div>
+	<div class="out">
+		<div class="in to sa"></div>
+	</div>
+
+</body>
+
+</html>

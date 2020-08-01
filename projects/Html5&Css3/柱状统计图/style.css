@@ -1,0 +1,154 @@
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  perspective: 600px;
+  overflow: hidden;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.card {
+  width: 350px;
+  height: 450px;
+  background: url("landscape.jpg") no-repeat center;
+  background-size: cover;
+  margin: auto;
+  position: relative;
+  border-radius: 15px;
+  transform-style: preserve-3d;
+  transition: all 1s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.card .style {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 15px;
+}
+.card::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 15px;
+}
+.card::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 15px;
+  background-color: #000;
+  z-index: -1;
+  transform: translateZ(-20px);
+}
+.card .chart {
+  transition: inherit;
+  display: flex;
+  justify-content: center;
+}
+.card .chart li {
+  transition: inherit;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  background: white;
+  margin: 10px;
+  transform: rotateZ(30deg);
+  transform-style: preserve-3d;
+}
+.card .chart li .front {
+  transition: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 0px;
+  height: 30px;
+  background: gainsboro;
+  text-align: right;
+  transform-origin: 0 100%;
+  transform-style: preserve-3d;
+  transform: rotateY(-90deg) rotateX(-90deg) translateY(30px);
+}
+.card .chart li .front::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: gainsboro;
+  transform-origin: 0 100%;
+  transform: rotateX(-90deg) translateY(30px);
+}
+.card .chart li .top {
+  transition: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: gainsboro;
+}
+.card.dome {
+  transform: rotateX(60deg) translate3d(0px, -50px, 50px);
+}
+.card.dome::before {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.card.dome li:nth-child(1) .front {
+  width: 200px;
+}
+.card.dome li:nth-child(1) .top {
+  transform: translateZ(200px);
+}
+.card.dome li:nth-child(2) .front {
+  width: 100px;
+}
+.card.dome li:nth-child(2) .top {
+  transform: translateZ(100px);
+}
+.card.dome li:nth-child(3) .front {
+  width: 80px;
+}
+.card.dome li:nth-child(3) .top {
+  transform: translateZ(80px);
+}
+.card.dome li:nth-child(4) .front {
+  width: 150px;
+}
+.card.dome li:nth-child(4) .top {
+  transform: translateZ(150px);
+}
+.card.dome li:nth-child(5) .front {
+  width: 50px;
+}
+.card.dome li:nth-child(5) .top {
+  transform: translateZ(50px);
+}
+/*# sourceMappingURL=./style.css.map */

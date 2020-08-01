@@ -1,0 +1,29 @@
+/* 初始化样式开始 */
+*{
+	margin: 0;
+	padding: 0;
+ }
+li{
+	list-style: none;
+ }
+ a{
+	 text-decoration: none;
+	 color: #666666;
+ }
+ a:hover{
+	 color: #ff3366;
+ }
+ body{
+	 font-size: 10px;
+	 font-family: "微软雅黑";
+ }
+ .fl{
+	 float: left;
+ }
+ .fr{
+	 float: right;
+ }
+ input{
+	 outline: none;
+ }
+/* 初始化样式结束 */

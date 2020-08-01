@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="./font/iconfont.css">
+	<link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<div id='app'>
+		<div id="living_costs">
+			<div class="reserve_nav"></div>
+			<div class="u-tabBox">
+				<div class="in_out">
+					<span v-for='(item,index) in in_out' @click='flag=index' :class='{in_out_demo:flag==index}'>{{item.title}}</span>
+					
+				</div>
+				<div class="u_tabSelect">
+					<ul class="ul_tsbox">
+						<li class="tsbox" v-for='(item,index) in lists' @click='num=index' :class='{u_tabSelect_demo:num==index}'>
+							<div class="icon_box" :style="{backgroundColor:item.bgc}">
+								<span class="iconfont" :class='item.iconFontClass'></span>
+							</div>
+							<p class="icon_text">{{item.title}}</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="m-accountSelect">
+				<p class="accountSelect_text">账户选择</p>
+				<div class="accountSelect_tab">
+					<ul>
+						<li v-for='(item,index) in accountSelect_data' :class='{accountSelect_demo:current==index}' @click='current=index'>{{item.title}}</li>
+						
+					</ul>
+				</div>
+			</div>
+			<div class="addMessage">
+				<ul>
+					<li>
+						<span>日期：</span>
+						<input type="datetime-local" class="date_ipt" v-model='date'>
+					</li>
+					<li>
+						<span>金额：</span>
+						<input type="text" placeholder="输入金额" v-model='money'>
+					</li>
+					<li>
+						<span>备注：</span>
+						<input type="text" placeholder="输入备注" v-model='remark'>
+					</li>
+				</ul>
+			</div>
+			<div class="saveBox">
+				<button class="savebtn" @click='saveMessage'>保存</button>
+			</div>
+
+			<!-- 打印出账单 -->
+			<div id="billBox">
+				<div class="bill_message" v-for='(item,index) in messageData'>
+					<div class="iconBox fl" :style='{backgroundColor:item.bgc}'>
+						<span class="iconfont" :class='item.iconFontClass'></span>
+					</div>
+					<div class="fl m_messageBox" :style='{lineHeight:(item.remark?"":item.lineHeight)}'>
+						<div class="messageBox fl">
+							<span class="time">{{item.date}}</span>
+							<span class="payway">{{item.payway}}</span>
+						</div>
+						<p class="remark fl" v-if='item.remark'>备注：{{item.remark}}</p>
+					</div>
+					<div class="moneyBox fr" :style='{color:item.color}'>￥<span>{{item.money}}</span></div>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+	<script>
+		var vm = new Vue({
+			el:'#app',
+			data:{ 
+				lineHeight:'.5rem',
+				current:0,//账户选择默认选中 
+				num:null,//u_tabSelect默认选中
+				flag:0,//收入支出默认选中
+				date:'',//存时间
+				remark:'',//存备注
+				money:'',//存金额
+				color:'green',//存收入/支出颜色
+				
+				lists:[
+					{title:'餐饮',iconFontClass:'icon-92',bgc:'#ff9a0e'},
+					{title:'购物',iconFontClass:'icon-gouwu',bgc:'#f95f40'},
+					{title:'出行',iconFontClass:'icon-icon-test',bgc:'#fd9732'},
+					{title:'健康',iconFontClass:'icon-navicon-jkgy',bgc:'#b6e34b'},
+					{title:'娱乐',iconFontClass:'icon-yule',bgc:'#fb5377'},
+					{title:'住房',iconFontClass:'icon-zhufang',bgc:'#fc8736'},
+					{title:'交通',iconFontClass:'icon-traffic',bgc:'#fc802e'},
+					{title:'人情',iconFontClass:'icon-005',bgc:'#fd6877'},
+					{title:'学习',iconFontClass:'icon-xuexi',bgc:'#fd9507'},
+					{title:'其他',iconFontClass:'icon-qita',bgc:'#fbb208'},
+				],
+				accountSelect_data:[
+				{title: '支付宝'},
+        		{title: '微信'},
+        		{title: '现金'},
+        		{title: '储蓄卡'},
+        		{title: '信用卡'}
+				],
+				//收入/支出
+				in_out: [
+        		{title: '收入'},
+        		{title: '支出'}
+      			],
+				//存储打印出来的数据
+				messageData:[]
+			},
+			methods:{ 
+				saveMessage(){
+					var obj = {}
+					var payway = this.accountSelect_data[this.current].title
+					if(this.num==null){
+						alert('请选择消费方式')
+						return
+					}else{
+						obj.iconFontClass = this.lists[this.num].iconFontClass
+						obj.bgc = this.lists[this.num].bgc
+					// console.log(this.lists[this.num].iconFontClass)
+					}
+					if(this.money==''){
+						alert('请输入金额')
+						return
+					}else{
+						obj.money = this.money
+						// console.log(this.money)
+					}
+					if(this.date==''){
+						alert('请选择日期')
+						return
+					}else{
+						obj.date = this.date.replace('T','/')
+						// console.log(this.date.replace('T','/'))
+					}
+					obj.remark = this.remark
+					obj.payway = this.accountSelect_data[this.current].title
+					obj.lineHeight = this.lineHeight
+					// console.log(this.remark)
+					
+					console.log(this.messageData)
+					//判断是收入还是支出
+					if(this.flag==0){
+						console.log('当前为收入')
+						this.color = 'green'
+						obj.color = this.color
+					}else{
+						console.log('当前为支出')
+						this.color = 'red'
+						obj.color = this.color
+					}
+					//添加进数组数据
+					this.messageData.push(obj)
+					//判断备注是否为空
+					
+				}
+			}
+		})
+		//思路：当前的默认 data中的变量current
+	</script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="./js/rem.js"></script>
+</body>
+</html>

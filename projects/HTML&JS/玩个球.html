@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .ball0 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: -webkit-radial-gradient(20px 20px, transparent, rgba(255, 0, 0, 0.3));
+            position: absolute;
+
+        }
+        .ball1 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: -webkit-radial-gradient(20px 20px, transparent, rgba(255, 0, 0, 0.3));
+            position: absolute;
+
+        }
+        .ball2 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: -webkit-radial-gradient(20px 20px, transparent, rgba(255, 0, 0, 0.3));
+            position: absolute;
+
+        }
+        .ball3 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: -webkit-radial-gradient(20px 20px, transparent, rgba(255, 0, 0, 0.3));
+            position: absolute;
+
+        }
+        .ball4 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: -webkit-radial-gradient(20px 20px, transparent, rgba(255, 0, 0, 0.3));
+            position: absolute;
+
+        }
+        .ball5 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: -webkit-radial-gradient(20px 20px, transparent, rgba(255, 0, 0, 0.3));
+            position: absolute;
+
+        }
+        button{
+            width: 50px;
+            height: 50px;
+            background: skyblue;
+            cursor: pointer;
+            border-radius: 5px;
+
+        }
+
+    </style>
+</head>
+<body>
+<button class="add">加入小球</button>
+<button class="addSpeed">加速</button>
+<script>
+    window.onload = function () {
+
+        var flag = 1;
+        var sep = 5;
+        var num1=1;
+        var num2=1;
+        var add = document.querySelector('.add');
+        var addSpeed = document.querySelector('.addSpeed');
+
+        //增加小球
+        add.onclick = function () {
+            //console.log(flag)
+            for (var i=flag-1;i<flag;i++){
+                console.log(flag);
+                var Div = document.createElement('div');
+                Div.className = 'ball'+i;
+                document.body.appendChild(Div);
+                fnn('.ball'+i,sep,sep,num1,num2);
+            }
+            flag+=1;
+            if (flag==7){
+                this.disabled = true;
+            }
+        };
+
+
+        //获取可视文档的xy
+        var innerX = innerWidth;
+        var innerY = innerHeight;
+        function fnn(selector,speedY,speedX,n1,n2) {
+            //获取球的宽度高度
+
+            var ball = document.querySelector(selector);
+            var ballW = ball.offsetWidth;
+            var ballH = ball.offsetHeight;
+
+            function fn() {
+
+                //加速小球
+                addSpeed.onclick = function(){
+                    n1++;
+                    n2++;
+                    console.log('加速',n1,n2)
+                };
+                var sY = n1*speedY;
+                var sX = n2*speedX;
+                ball.style.top = ball.offsetTop+sY+'px';
+                ball.style.left = ball.offsetLeft+sX+'px';
+                //垂直与水平方向的最大移动距离
+                var maxFarY = innerY-ballH;
+                var maxFarX = innerX-ballW;
+
+                if (ball.offsetTop>=maxFarY||ball.offsetTop<=0){
+                    speedY = -speedY
+
+                }
+                if (ball.offsetLeft>=maxFarX||ball.offsetLeft<=0){
+                    speedX = -speedX
+                }
+            }
+            setInterval(fn,30);
+            //随机位置小球
+            var max = innerWidth-ball.offsetWidth;
+            var may = innerHeight-ball.offsetHeight;
+            var X = Math.floor(Math.random()*(max+1));
+            var Y = Math.floor(Math.random()*(may+1));
+            ball.style.left = X+'px';
+            ball.style.top = Y+'px';
+        }
+    }
+</script>
+</body>
+</html>

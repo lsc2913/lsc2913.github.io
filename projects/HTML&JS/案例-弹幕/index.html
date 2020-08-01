@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style:none;
+        }
+        input{
+            border:none;
+            outline:none;
+        }
+        img{
+            vertical-align: bottom;
+        }
+        .wrapBox{
+            width: 800px;
+            margin:20px auto;
+            box-shadow: 0 0 8px #e5e9ef;
+        }
+        .wrapBox .videoBox {
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+        .wrapBox .videoBox .danmu{
+            color:#f00;
+            font-size:20px;
+            position:absolute;
+            left: 800px;
+            top: 0;
+            white-space:nowrap;
+        }
+        .wrapBox>.videoBox>img{
+            width: 100%;
+            height: 100%;
+        }
+        .wrapBox .danmuSend{
+            height:40px;
+            padding: 10px 12px 0 20px;
+            position: relative;
+        }
+        .wrapBox .danmuSend #content{
+            background:#f4f4f4;
+            border:1px solid #e7e7e7;
+            text-indent: 1em;
+            height: 28px;
+            width: 700px;
+            float: left;;
+        }
+        .wrapBox .danmuSend #send{
+            width: 60px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background: #00a1d6;
+            color:white;
+            border:none;
+            cursor: pointer;
+            float: left;
+        }
+        .wrapBox .danmuSend #send:hover{
+            background: #00b5e5;
+        }
+
+        .wrapBox .danmuSend #face_btn{
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            right: 79px;
+            top: 50%;
+            padding: 5px;
+            transform: translateY(-50%);
+        }
+        .wrapBox .danmuSend .panel{
+            width: 390px;
+            padding:2px;
+            border:1px solid #ccc;
+            background-color: #fff;
+            position: absolute;
+            right: 0;
+            top: -116px;
+        }
+        .wrapBox .danmuSend .panel .list li{
+            float: left;
+            margin-right: 2px;
+        }
+        
+       
+    </style>
+</head>
+<body>
+    <div class="wrapBox">
+        <!-- 上部分 背景图-->
+        <div class="videoBox">
+            <img src="images/bg.jpg">
+            <!-- <span class="danmu">我是弹幕</span> -->
+        </div>
+
+        <!-- 下部分 发送弹幕 -->
+        <div class="danmuSend">
+            <input type="text" id="content" placeholder="发个弹幕见证当下">
+            <div class="panel" style="display: none">
+                <!-- <ul class="list">
+                    <li><img src="images/1.gif"/></li>
+                </ul> -->
+            </div>
+            <img src="images/biaoqing.png" id="face_btn"/>
+            <button id="send">发送</button>
+        </div>
+    </div>
+    <script src="js/animated.js"></script>
+    <script>
+        // 获取对象
+        var oVideoBox = document.querySelector(".videoBox");
+        var oContent = document.querySelector("#content");
+        var oSend = document.querySelector("#send");
+
+        oSend.onclick=function(){
+            var content  = oContent.value;
+            if(content == ""){
+                alert("请填写弹幕内容");
+                return;
+            }
+            creteDanmu(content);
+            oContent.value = "";
+        }
+
+        oContent.onkeyup = function(e){
+            if(e.keyCode == 13){
+                var content  = oContent.value;
+                if(content == ""){
+                    alert("请填写弹幕内容");
+                    return;
+                }
+                creteDanmu(content);
+                oContent.value = "";
+            }
+        }
+
+        // 创建弹幕的方法
+        function creteDanmu(content){
+            // 创建元素
+            var Ospan  = document.createElement("span");
+
+            Ospan.innerHTML = replace_em(content);
+            Ospan.className = "danmu";
+            oVideoBox.appendChild(Ospan);
+            var top = Math.floor( Math.random()*(oVideoBox.offsetHeight - Ospan.offsetHeight) );
+            Ospan.style.top = top + "px";
+            animated_linear(Ospan,-Ospan.offsetWidth,function(){
+                Ospan.parentNode.removeChild(Ospan);
+            });
+        }
+
+
+        // 替换字符串  正则表达式
+        function replace_em(str){
+            str = str.replace(/\[em_([0-9]*)\]/g,'<img src="images/$1.gif"/>');
+            return str;
+        }
+
+
+        
+        // 表情图片数组
+        var biaoQingImgs = [];
+        for(var i=1;i<=75;i++){
+            // 循环把图片路径添加到数组中 
+            biaoQingImgs.push( "images/"+i+".gif" );
+        }
+
+        // 获取表情按钮
+        var face_btn = document.querySelector("#face_btn");
+        // 获取表情面板
+        var panel = document.querySelector(".panel");
+        face_btn.onclick=function(){
+            if(panel.style.display == "none"){
+                panel.style.display = "block";
+            }else{
+                panel.style.display = "none";
+            }
+
+            var html = '';
+            html += '<ul class="list">';
+            for(var j=0;j<biaoQingImgs.length;j++){
+                html+= '<li><img src="'+biaoQingImgs[j]+'"/></li>';
+            }
+            html += '</ul>';
+            panel.innerHTML = html;
+
+            var list = document.querySelector(".panel .list");
+            list.onclick=function(e){
+                var path = e.target.src;
+                var arr_ext = path.split("/");
+                var filename = arr_ext[arr_ext.length-1];
+                // 得到图片名
+                var index = filename.split(".")[0];
+                // 拼接字符串,放入文本框中
+                var str = "[em_"+index+"]";
+                oContent.value += str;
+                
+                panel.style.display = "none";
+            }
+        }
+
+
+    </script>
+</body>
+</html>

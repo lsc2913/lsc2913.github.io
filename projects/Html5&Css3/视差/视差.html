@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="box">
+		<img src="qx.png">
+	</div>
+	<script>
+		var x = innerWidth;
+		var y = innerHeight;
+		// console.log(x,y)
+		document.onmousemove = function(e){
+			var w = e.pageX-x/2;
+			var h = e.pageY-y/2
+			console.log(w/(x/2/50),h/(y/2/50))
+			document.body.style.perspectiveOrigin = (50+w/(x/2/50))+'% '+(50+h/(y/2/50))+'%';
+			document.querySelector('.box').style.transform = "rotateX(" + h/(y/2/50)/2 + "deg) rotateY(" + w/(x/2/50)/2 + "deg)";
+			document.querySelector('img').style.transform = "translateX(" + -w/(x/2/50)/2 + "px) translateY(" + h/(y/2/50)/2 + "px)";
+			// document.querySelector('.box').style.backgroundPosition = w/(x/2/50)/2 * .45 + "px " + -h/(y/2/50)/2 * .45 + "px";
+		}
+	</script>
+</body>
+</html>

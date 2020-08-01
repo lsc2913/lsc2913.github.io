@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{margin: 0;padding: 0;
+        /* background: url(./earth.gif) no-repeat;
+        background-size: cover; */
+        background-color: #989593;
+        }
+        .title{
+            font-size: 40px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container{
+            width: 1200px;
+            margin: 0 auto;
+        }
+        .content{
+            margin-top: 50px;
+        }
+
+        .html_css{
+            padding-bottom: 30px;
+            border-bottom: 10px solid #3e4944;
+            border-radius: 20px;
+            margin-bottom: 150px;
+            /* #393733 */
+        }
+        .html_css_title{
+            padding-left: 38px;
+            margin: 20px 0;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .projectBox{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .project{
+           background-color: #fff;
+           width: 220px;
+           margin: 0 40px 30px 40px;
+           transition: all 0.5s;
+           position: relative;
+        }
+        .project:hover{
+            transform: translateY(-10px);
+            box-shadow: 0 0 10px 5px #ccc;
+            /* transform: rotateY(180deg);; */
+        }
+        .projectImg{
+            width: 200px;
+            height: 200px;
+            background-color: #fff;
+            margin: 10px;
+            overflow: hidden;
+            display: block;
+        }
+        /* 图片自适应 */
+        img {
+            width: 100%;
+            height: auto;
+            width: auto\9; /* ie8 */
+            display: block;
+            -ms-interpolation-mode: bicubic;/*为了照顾ie图片缩放失真*/
+        }
+        .project_des{text-align: center;margin-bottom: 10px;}
+
+        .slider-bar {
+            position: fixed;
+            right: 100px;
+            bottom: 100px;
+            width: 80px;
+            height: 80px;
+            background-color: pink;
+            display: none;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 80px;
+            cursor: pointer;
+            box-shadow: 0 0 2px 2px #ccc;
+        }
+        @keyframes mymove
+        {
+            0% {box-shadow: 0 0 2px 2px #ccc;}
+            50% {box-shadow:0 0 5px 5px #ccc;}
+            100% {box-shadow: 0 0 2px 2px #ccc;}
+        }
+        .slider-bar:hover{
+            animation:mymove 1s infinite;
+        }
+    </style>
+    <script src="js/animated.js"></script>
+</head>
+<body>
+    <div class="title">项目展示</div>
+    <div class="content">
+        <!-- HTML&nbspCSS&nbspJS -->
+        <div class="html_css m container">
+            <div class="html_css_title">HTML&nbspCSS&nbspJS</div>
+            <div class="projectBox">
+                <div class="project">
+                    <a class="projectImg" href="./projects/HTML&JS/表单验证/表单验证.html" target="_blink">
+                        <img src="./images/1.png">
+                    </a>
+                    <div class="project_des">表单验证</div>
+                    <div class="mask"></div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/HTML&JS/自定义上传图片按钮/自定义上传按钮.html" target="_blink">
+                        <img src="./images/自定义上传图片按钮.png">
+                    </a>
+                    <div class="project_des">自定义上传图片按钮</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/HTML&JS/玩个球.html" target="_blink">
+                        <img src="./images/屏保气泡.png">
+                    </a>
+                    <div class="project_des">屏保气泡</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/HTML&JS/地址三级联动/index.html" target="_blink">
+                        <img src="./images/地址三级联动.png">
+                    </a>
+                    <div class="project_des">地址三级联动</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/HTML&JS/对比/duibi.html" target="_blink">
+                        <img src="./images/对比.png">
+                    </a>
+                    <div class="project_des">对比</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/HTML&JS/案例-弹幕/index.html" target="_blink">
+                        <img src="./images/弹幕.png">
+                    </a>
+                    <div class="project_des">弹幕</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/HTML&JS/滑动验证/滑动验证.html" target="_blink">
+                        <img src="./images/滑动验证.png">
+                    </a>
+                    <div class="project_des">滑动验证</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/HTML&JS/拼图游戏/九宫格.html" target="_blink">
+                        <img src="./images/九宫格.png">
+                    </a>
+                    <div class="project_des">九宫格</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/HTML&JS/移动端手机支付/手机支付.html" target="_blink">
+                        <img src="./images/移动端手机支付.png">
+                    </a>
+                    <div class="project_des">移动端手机支付</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/HTML&JS/放大镜(完整版)/京东放大镜(完整版).html" target="_blink">
+                        <img src="./images/放大镜.png">
+                    </a>
+                    <div class="project_des">放大镜</div>
+                </div>
+                
+                
+            </div>
+        </div>
+        <!-- 静态网页 -->
+        <div class="html_css m container">
+            <div class="html_css_title">静态网页</div>
+            <div class="projectBox">
+                <div class="project">
+                    <a class="projectImg" href="./projects/静态网页/美丽说/美丽说.html" target="_blink">
+                        <img src="./images/美丽说.png">
+                    </a>
+                    <div class="project_des">美丽说</div>
+                    <div class="mask"></div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/静态网页/学成在线/学成在线完整版.html" target="_blink">
+                        <img src="./images/学成在线.png">
+                    </a>
+                    <div class="project_des">学成在线</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/静态网页/models案例2/models.html" target="_blink">
+                        <img src="./images/模特.png">
+                    </a>
+                    <div class="project_des">模特</div>
+                </div>
+            </div>
+        </div>
+        <!-- HTML5&nbspCSS3 -->
+        <div class="html_css m container">
+            <div class="html_css_title">HTML5&nbspCSS3</div>
+            <div class="projectBox">
+                <div class="project">
+                    <a class="projectImg" href="./projects/Html5&Css3/作业1.html" target="_blink">
+                        <img src="./images/动态图标.png" alt="">
+                    </a>
+                    <div class="project_des">动态图标</div>
+                    <div class="mask"></div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/Html5&Css3/折线图.html" target="_blink">
+                        <img src="./images/折线图.png" alt="">
+                    </a>
+                    <div class="project_des">折线图</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/Html5&Css3/魔方.html" target="_blink">
+                        <img src="./images/魔方.png" alt="">
+                    </a>
+                    <div class="project_des">魔方</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/Html5&Css3/视差/视差.html" target="_blink">
+                        <img src="./images/视差.png" alt="">
+                    </a>
+                    <div class="project_des">视差</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/Html5&Css3/柱状统计图/统计图.html" target="_blink">
+                        <img src="./images/柱状统计图.png" alt="">
+                    </a>
+                    <div class="project_des">柱状统计图</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/Html5&Css3/音乐播放器/music.html" target="_blink">
+                        <img src="./images/音乐播放器.png" alt="">
+                    </a>
+                    <div class="project_des">音乐播放器</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/Html5&Css3/canvas画笔/index.html" target="_blink">
+                        <img src="./images/画笔.png" alt="">
+                    </a>
+                    <div class="project_des">画笔</div>
+                </div>
+            </div>
+        </div>
+        <!-- vue -->
+        <div class="html_css m container">
+            <div class="html_css_title">vue</div>
+            <div class="projectBox">
+                <div class="project">
+                    <a class="projectImg" href="./projects/vue/购物评价/购物评价.html" target="_blink">
+                        <img src="./images/星级评价.png">
+                    </a>
+                    <div class="project_des">购物评价</div>
+                    <div class="mask"></div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/vue/生活开支/living-costs.html" target="_blink">
+                        <img src="./images/生活开支.png">
+                    </a>
+                    <div class="project_des">生活开支</div>
+                </div>
+                <div class="project">
+                    <a class="projectImg" href="./projects/vue/weatherCase/index.html" target="_blink">
+                        <img src="./images/市级天气查询.png">
+                    </a>
+                    <div class="project_des">市级天气查询</div>
+                </div>
+            </div>
+        </div>
+        <div class="js_jquery m"></div>
+    </div>
+    <div class="slider-bar">
+        返回顶部
+    </div>
+
+    <script>
+        var oSmallBox = document.querySelector('.slider-bar');
+        window.onscroll = function () {
+        if (window.pageYOffset>200)
+            {
+                oSmallBox.style.display = 'block'
+            }else
+            {
+                oSmallBox.style.display = 'none'
+            }
+        };
+        oSmallBox.onclick = function () {
+            animatedLeft(window,0)
+        }
+    </script>
+</body>
+</html>

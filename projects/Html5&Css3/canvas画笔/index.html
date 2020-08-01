@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .big_box {
+            width: 1000px;
+            height: 650px;
+            border: 1px solid red;
+            margin: 30px auto 0;
+            box-sizing: border-box;
+        }
+
+        .canvas_top {
+            width: 100%;
+            height: 120px;
+            background-color: rgba(204, 204, 204, 0.404);
+
+        }
+
+        .canvas_body {
+            width: 100%;
+            height: 530px;
+            background-color: rgba(0, 0, 0, 0.021);
+        }
+
+        .pen {
+            font-size: 14px;
+            line-height: 25px;
+            margin-bottom: 10px;
+
+        }
+
+        input {
+            vertical-align: middle;
+            margin: 0 10px;
+        }
+
+        .del,.cancel,.save {
+            float: left;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="big_box">
+        <div class="canvas_top">
+            <div class="pen">选择画笔大小: <input type="range" value="1" max="20" min="1" step="1" /><label
+                    class="label">1</label></div>
+            <div class="color">选择画笔颜色:<input type="color" name="" id=""></div>
+            <div class="del"><input type="button" value="清空画板" id="del"></div>
+            <div class="cancel"><input type="button" value="撤回上一步" id="cancel"></div>
+            <div class="save"><input type="button" value="保存为图片" id="save"></div>
+        </div>
+        <div class="canvas_body">
+            <canvas class="c" width="1000" height="530"></canvas>
+        </div>
+    </div>
+</body>
+<script src="jquery-3.4.1.min.js"></script>
+<script>
+    $(function () {
+        // 获取画笔元素
+        var range = $('input[type=range]');
+        // 获取label元素
+        var label = $('.label');
+        // 获取颜色
+        var color = $('input[type=color]');
+
+        range.on('change', function () {
+            label.html($(this).val());
+        });
+        var penColor = '#000000';
+        color.on('change', function () {
+            penColor = color.val()
+            console.log(penColor)
+        })
+
+        // 获取canvas元素
+        var canvas = $('.c');
+
+        // 历史记录
+        var history = [];
+        var len = 0;
+        // 设置绘画环境
+        var context = canvas[0].getContext('2d');
+        canvas.on('mousedown', function (e) {
+            context.beginPath();
+            //设置描边样式
+            context.strokeStyle = penColor;
+            //设置线条大小
+            context.lineWidth = label.html();
+            // 设置线条头部和尾部变圆滑
+            context.lineCap = 'round';
+            var X1 = e.pageX - canvas[0].offsetLeft;
+            var Y1 = e.pageY - canvas[0].offsetTop;
+            context.moveTo(X1, Y1);
+            canvas.on('mousemove', function (e) {
+                var X2 = e.pageX - canvas[0].offsetLeft;
+                var Y2 = e.pageY - canvas[0].offsetTop;
+                context.lineTo(X2, Y2);
+                context.stroke()
+
+            })
+            context.closePath();
+            // 鼠标按下时保存画笔(此时，最后一笔将不能保存，需要保存则要重新保存最后时刻)
+            var c1 = context.getImageData(0, 0, canvas[0].width, canvas[0].height);
+            history.push(c1);
+            len = history.length;
+
+        })
+
+        var c2;
+        // 鼠标松开时取消移动事件
+        canvas.on('mouseup', function () {
+            // 取消移动事件
+            canvas.off('mousemove')
+        })
+        // 鼠标离开区域时取消移动事件
+        canvas.on('mouseout', function () {
+            canvas.off('mousemove');
+        })
+
+        var clear = false;
+        $('#del').on('click', function () {
+        //    清除前先保存画布
+            c2 = context.getImageData(0, 0, canvas[0].width, canvas[0].height);
+             //清除画板
+            // context.clearRect(开始清除的x,开始清除的y,清除区域的宽，清除区域的高)
+            context.clearRect(0, 0, canvas[0].width, canvas[0].height);
+            clear = true;
+
+        })
+        // 撤回上一步
+        $('#cancel').on('click', function () {
+
+            if (clear == true) {
+                clear = false;
+                context.putImageData(c2, 0, 0)
+            } else if (len > 0) {
+                for (var i = 0; i < len; i++) {
+                    context.putImageData(history[i], 0, 0)
+                }
+                len--;
+
+            } else {
+                history = [];
+            }
+
+        })
+
+        $('#save').on('click',function(){
+            save()
+        })
+        function save(){
+            var name = prompt('请输入要保存的图片名字','test');
+            if(name.trim() == ""){
+                alert("名字不能为空")
+            }else{
+                // 创建a标签并自触发点击事件 实现下载图片(下载位置与浏览器设置有关)
+                var href = canvas[0].toDataURL();
+                var a = document.createElement('a');
+                a.download = name;
+                a.href = href;
+                a.dispatchEvent(new MouseEvent('click'))
+            }
+        }
+
+    })
+</script>
+
+</html>

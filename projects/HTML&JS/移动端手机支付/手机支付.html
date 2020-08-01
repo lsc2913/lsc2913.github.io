@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'iconfont';
+            src: url('font/iconfont.eot');
+            src: url('font/iconfont.eot?#iefix') format('embedded-opentype'),
+            url('font/iconfont.woff2') format('woff2'),
+            url('font/iconfont.woff') format('woff'),
+            url('font/iconfont.ttf') format('truetype'),
+            url('font/iconfont.svg#iconfont') format('svg');
+        }
+
+        .iconfont {
+            font-family: "iconfont" !important;
+            font-size: 16px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        #outBox{
+            width: 305px;
+            margin: 100px auto;
+        }
+        .ipt{
+
+        }
+        #outBox .span{
+            color: red;
+        }
+        #payBox{
+            width: 100%;
+            height: 320px;
+            background: #fff;
+            margin-top: 225px;
+            overflow: hidden;
+            display: none;
+            position: relative;
+        }
+        #payBox p{
+            text-align: center;
+            margin-top: 20px;
+        }
+        #payBox p span{
+            color: red;
+        }
+        .password{
+            height: 50px;
+
+        }
+        .password .bx{
+            width: 40px;
+            height: 40px;
+            border: 1px solid lightslategrey;
+            border-right: 0;
+            box-sizing: border-box;
+            float: left;
+            text-align: center;
+            line-height: 40px;
+            outline: none;
+        }
+        .password .bx img{
+            margin-top: 9px;
+            margin-left: 9px;
+            display: none;
+        }
+        .password .bx:last-child{
+            border: 1px solid lightslategrey;
+        }
+        .password ul{
+            width: 240px;
+            margin: auto;
+        }
+        .number{
+            border-top: 1px solid lightslategrey;
+            border-bottom: 1px solid lightslategrey;
+            margin-top: 12px;
+        }
+        .number tr td{
+            width: calc(100% / 3);
+            text-align: center;
+            cursor: pointer;
+        }
+        .number tr td.clearAll{
+            background: lightgrey;
+        }
+        .number tr td.del{
+            background: lightgrey;
+        }
+        #payBox .icon{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: url("wrong.png") no-repeat;
+            background-size: 30px;
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+    <script src="mobilePayment.js"></script>
+    <script src="jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <div id="outBox">
+        <span class="span">请输入支付密码：</span><input type="text" class="ipt">
+    </div>
+    <div id="payBox">
+        <div class="icon"></div>
+        <p>您将支付<span>88</span>元，请输入支付密码</p>
+        <div class="password">
+            <ul>
+                <li class="bx" contentEditable="true"><img src="round.jpg"></li>
+                <li class="bx" contentEditable="true"><img src="round.jpg"></li>
+                <li class="bx" contentEditable="true"><img src="round.jpg"></li>
+                <li class="bx" contentEditable="true"><img src="round.jpg"></li>
+                <li class="bx" contentEditable="true"><img src="round.jpg"></li>
+                <li class="bx" contentEditable="true"><img src="round.jpg" name="6"></li>
+            </ul>
+
+        </div>
+        <div class="number">
+            <table width="100%" height="200px" rules="all" >
+                <tbody class="tbd">
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td class="clearAll"><span class="iconfont">&#xe946;</span></td>
+                        <td>0</td>
+                        <td class="del"><span class="iconfont">&#xe603;</span></td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+
+        var ipt = document.querySelector('.ipt');
+        var icon = document.querySelector('.icon');
+        var td = document.querySelectorAll('.number tr td');
+        var img = document.querySelectorAll('.password .bx img');
+        var selects = {
+            ipt:ipt,
+            payBox:'#payBox',
+            icon:icon,
+            td:td,
+            img:img
+        };
+        var pay = new Pay(selects);
+        pay.init();
+    }
+</script>
+</html>

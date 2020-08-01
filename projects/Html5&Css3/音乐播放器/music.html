@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="player">
+		<div class="nav">
+			<div class="song-list">
+				<ul style="padding-left: 5px;">
+					<li>
+						我的歌单
+						<ul class="mylist" style="padding-left: 5px;"></ul>
+					</li>
+				</ul>
+			</div>
+			<div class="play">
+				<div class="move"></div>
+				<div class="LP">
+					<img src="http://p1.music.126.net/-EV4XhJEJn_Ib7ebS1OHhg==/109951164820593469.jpg">
+				</div>
+			</div>
+			<div class="content">
+				<h2>晴天</h2>
+				<h4>歌手：<span>周杰伦</span></h4>
+				<div class="lyrics"></div>
+			</div>
+		</div>
+		<div class="play-scroll">
+			<div class="play-btn">
+				<button class="prve">上</button>
+				<button class="bf">播放/暂停</button>
+				<button class="next">下</button>
+			</div>
+			<div class="ps">
+				<span name="1">00:00</span>
+				<input type="range" min="0" max="100" step="0.01" value="0">
+				<span>00:00</span>
+			</div>
+			<div class="volume-scroll">
+				<input type="range" min="0" max="100" step="0.01" value="0">
+				<span class="play-way">列表循环</span>
+			</div>
+
+		</div>
+		<!-- <audio  controls></audio> -->
+	</div>
+	<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+	<script src="data.js"></script>
+	<script>
+		$(function () {
+			var current = 0;
+			//创建audio标签
+			$('body').append('<audio></audio>')
+			$('audio').attr('src', 'https://music.163.com/song/media/outer/url?id=' + playdata[0].id + '.mp3')
+			$('audio').attr('controls', 'true')
+			//点击播放按钮播放
+			$('.play-btn .bf').on('click', function () {
+
+				if ($('audio').get(0).paused) {
+					$('audio').get(0).play()
+					$('.play .move').css('transform', 'rotate(13deg)')
+					// $('.play .LP').css('animation-play-state','running')
+					$('.play .LP').css('animation', ' mylp 10s linear infinite')
+				} else {
+					$('audio').get(0).pause()
+					$('.play .move').css('transform', 'rotate(0deg)')
+					$('.play .LP').css('animation-play-state', 'paused')
+				}
+				//
+			})
+			//创建歌单
+			playdata.forEach(function (e, i) {
+				$('.song-list .mylist').append('<li>' + e.name + '</li>')
+			});
+			//初始化
+			$('.song-list .mylist li')[0].className = 'demo';
+			$('.content h2').text(playdata[0].name)
+			$('.content h4 span').text(playdata[0].artist)
+			//拿到当前的时间
+			$('audio').on('timeupdate', function () {
+				$('.ps input').val(this.currentTime / this.duration * 100)
+				$('.ps span')[0].innerText = gettime(this.currentTime)
+			})
+			$('.ps input').on('change', function () {
+				console.log(this.value)
+				$('audio').get(0).currentTime = this.value * $('audio').get(0).duration / 100
+			})
+			//
+			$('audio').on('durationchange', function () {
+				$('.ps span')[1].innerText = gettime(this.duration)
+			})
+
+			//获取时间
+			function gettime(time) {
+				// var n = Math.floor(time);
+				// var m = Math.floor(time / 60);
+				// var s = n % 60;
+				// m = m > 9 ? m : "0" + m;
+				// s = s > 9 ? s : "0" + s;
+				// return m + ":" + s;
+				var a = Math.floor(time)
+				var b = Math.floor(time / 60)
+				var s = a % 60;
+				b = b < 10 ? '0' + b : b;
+				s = s < 10 ? '0' + s : s;
+				return b + ':' + s;
+			}
+			//下一曲
+
+			$('.play-btn .next').on('click', function () {
+				console.log(111)
+				changeMusic(playdata)
+
+			})
+			console.log($('.mylist li').length)
+			//切换歌曲
+			function changeMusic(obj) {
+				current++
+				console.log(obj[current].name)
+				$('.content h2').text(obj[current].name)
+				$('.content h4 span').text(obj[current].artist)
+				$('audio').attr('src', 'https://music.163.com/song/media/outer/url?id=' + playdata[current].id + '.mp3')
+
+				$('.song-list .mylist li').each(function (i, e) {
+					console.log(i,e)
+					if (current == i) {
+						e.classList.add("demo");
+					} else {
+						e.classList.remove("demo");
+					}
+				})
+				if (current >= $('.mylist li').length - 1) {
+					current = -1;
+				}
+
+			}
+			// //列表顺序播放
+			//  $('audio').get(0).onended = function() {
+            //     current++;
+            //     if (current > $('.mylist li').length - 1) {
+            //         // 重新从0播放
+            //         current = 0;
+            //     }
+            //     changeMusic($('.song-list .mylist')[current]);
+            // };
+			
+			
+			
+			
+
+		})
+	
+		
+	</script>
+</body>
+
+</html>

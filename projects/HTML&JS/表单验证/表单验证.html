@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .w{
+            width: 400px;
+            height: 40px;
+            border: 1px solid #ced4da;
+        }
+        .m{
+            width: 100px;
+            display: inline-block;
+        }
+        .outBox{
+            width: 400px;
+            margin: 20px auto;
+        }
+        .form{
+            width: 100%;
+            height: 380px;
+
+        }
+        .form .w{
+            margin-bottom: 20px;
+        }
+        .ipt{
+            width: 291px;
+            height: 34px;
+            border: 0;
+            text-indent: 1em;
+
+            outline: none;
+        }
+        .select{
+            height: 100%;
+            border: 0;
+            border-right: 1px solid #ced4da;
+            outline: none;
+        }
+        .sbm{
+            width: 100%;
+            height: 100%;
+            outline: none;
+            background: #e4393c;
+            color: #fff;
+            border: 0;
+            cursor: pointer;
+        }
+        .a{
+            font-size: 10px;
+            text-decoration: none;
+        }
+        .userName,.password,.confirm_password,.cpn,.passCode{
+            position: relative;
+        }
+        .tips{
+            position: absolute;
+            right: -130px;
+            top: 8px;
+            color: red;
+            font-size: 15px;
+            display: none;
+        }
+    </style>
+    <script src="form.js"></script>
+</head>
+<body>
+<div class="outBox">
+    <div class="form">
+        <div class="userName w">
+            <span class="m">&nbsp用&nbsp&nbsp&nbsp户&nbsp&nbsp&nbsp名：</span>
+            <input type="text" class="ipt" name="0" placeholder="仅支持2-6位的中文,英文字母"><span class="tips">× 格式不符合规范</span>
+        </div>
+        <div class="password w">
+            <span class="m">&nbsp设&nbsp置&nbsp密&nbsp码：</span>
+            <input type="password" class="ipt" name="1" placeholder="仅支持6-12位的数字,字母"><span class="tips">× 格式不符合规范</span>
+        </div>
+        <div class="confirm_password w">
+            <span class="m">&nbsp确&nbsp认&nbsp密&nbsp码：</span>
+            <input type="password" class="ipt" name="2" placeholder="请再次输入密码">
+            <span class="tips">× 两次密码不一致</span>
+        </div>
+        <div class="cpn w">
+            <select class="select m">
+                <option value="">中国 0086</option>
+            </select>
+            <input type="text" class="ipt" name="3" placeholder="仅支持11位的手机号码"><span class="tips">× 格式不符合规范</span>
+        </div>
+        <div class="passCode w">
+            <div style="width: 100px;height: 100%;display:block;float: left;line-height: 38px">&nbsp验&nbsp&nbsp&nbsp证&nbsp&nbsp&nbsp码：</div>
+            <input type="text" class="pcIpt" placeholder="请输入验证码" style="width: 120px;height: 38px;border: 0;outline: none;float: left;">
+            <span class="yzmBox" style="display:block;width: 80px;height: 100%;float: left;background:grey;color: #fff;text-align: center;line-height: 38px;font-size: 23px">ABCD</span>
+            <button class="btn" style="display:block;width: 100px;height: 100%;float: left;cursor: pointer;">获取验证码</button><span class="tips lastips">× 验证码错误</span>
+        </div>
+        <div class="checkBox">
+            <input type="checkbox" class="check">
+            <span>同意并阅读</span>
+            <a href="javascript:void(0)" class="a">《京东用户注册协议》</a>　<a href="javascript:void(0)" class="a">《隐私政策》</a>
+        </div>
+    </div>
+    <div class="signIn w"><input type="submit" value="立即注册" class="sbm"></div>
+</div>
+</body>
+</html>

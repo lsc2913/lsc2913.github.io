@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5485616",
+      "name": "错误",
+      "font_class": "cuowu",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "6219264",
+      "name": "清空",
+      "font_class": "qingkong",
+      "unicode": "e946",
+      "unicode_decimal": 59718
+    },
+    {
+      "icon_id": "10706971",
+      "name": "错误 wrong",
+      "font_class": "cuowu-",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    }
+  ]
+}

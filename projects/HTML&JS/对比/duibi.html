@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;}
+        #outBox{
+            width: 450px;
+            height: 500px;
+            box-shadow: grey 1px 1px 5px 1px;
+            margin:20px auto;
+            background: url("3.jpg");
+            background-size: cover;
+            position: relative;
+        }
+        .one,.two{
+            width: 100%;
+            height: 100%;
+        }
+        .one{
+            background: url("1.jpg");
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            width: 100px;
+        }
+        .two{
+            background: url("2.jpg");
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+        }
+        .oneScroll,.twoScroll{
+            width: 10px;
+            height: 100%;
+            background: deepskyblue;
+            z-index: 4;
+            position: absolute;
+            top: 0;
+        }
+        .oneScroll{
+            left: 100px;
+        }
+        .twoScroll{
+            left: 200px;
+        }
+    </style>
+    <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="outBox">
+    <div class="one"></div>
+    <div class="oneScroll">1</div>
+    <div class="two"></div>
+    <div class="twoScroll">2</div>
+</div>
+<script>
+    $(function () {
+        //先做出可以移动
+        $('.oneScroll').on('mousedown',function (e) {
+            var scroW =e.pageX-$('.oneScroll').offset().left;
+            $(document).on('mousemove',function (e) {
+                var w = e.pageX-$('#outBox').offset().left-scroW;
+                w = w<=0?0:w;
+                w = w>=parseInt($('#outBox').css('width'))?parseInt($('#outBox').css('width')):w;
+                $('.oneScroll').css('left',w+'px');
+                $('.one').css('width',w+'px');
+
+                if ((w+parseInt($('.oneScroll').css('width')))>parseInt($('.two').css('width'))){
+                    $('.twoScroll').css('left',w+parseInt($('.oneScroll').css('width'))+'px');
+                    $('.two').css('width',w+parseInt($('.oneScroll').css('width'))+'px')
+                }
+            })
+        });
+        $('.twoScroll').on('mousedown',function (e) {
+            var scroW =e.pageX-$('.twoScroll').offset().left;
+            $(document).on('mousemove',function (e) {
+                var w = e.pageX-$('#outBox').offset().left-scroW;
+                w = w<=0?0:w;
+                w = w>=parseInt($('#outBox').css('width'))?parseInt($('#outBox').css('width')):w;
+                $('.twoScroll').css('left',w+'px');
+                $('.two').css('width',w+'px');
+
+                if ((w<parseInt($('.one').css('width'))+parseInt($('.oneScroll').css('width')))){
+                    $('.oneScroll').css('left',w-parseInt($('.oneScroll').css('width'))+'px');
+                    $('.one').css('width',w-parseInt($('.oneScroll').css('width'))+'px')
+                }
+            })
+        });
+        $(document).on('mouseup',function () {
+            $(document).off('mousemove')
+        })
+
+    })
+</script>
+</body>
+</html>
